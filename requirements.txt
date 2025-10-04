@@ -1,0 +1,9 @@
+Flask
+Flask-WTF
+Flask-Login
+Flask-SQLAlchemy
+Flask-Session
+Flask-Limiter
+python-dotenv
+Flask-Talisman
+WTForms

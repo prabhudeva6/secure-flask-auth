@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width,initial-scale=1'>
+<title>{% block title %}SecureApp{% endblock %}</title>
+<style>
+body{font-family:system-ui,Arial;max-width:800px;margin:2rem auto;padding:1rem}
+.flash{padding:10px;border-radius:6px;margin:8px 0}
+.flash.success{background:#e6ffed;border:1px solid #b7f2c7}
+.flash.danger{background:#ffe6e6;border:1px solid #f2b7b7}
+.flash.info{background:#eef0ff;border:1px solid #c9d0ff}
+</style>
+</head>
+<body>
+<nav>
+<a href='{{ url_for("index") }}'>Home</a> |
+{% if current_user.is_authenticated %}
+<a href='{{ url_for("dashboard") }}'>Dashboard</a> |
+<a href='{{ url_for("logout") }}'>Logout</a>
+{% else %}
+<a href='{{ url_for("login") }}'>Login</a> |
+<a href='{{ url_for("register") }}'>Register</a>
+{% endif %}
+</nav>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, msg in messages %}
+<div class='flash {{ category }}'>{{ msg }}</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% block content %}{% endblock %}
+</body>
+</html>
